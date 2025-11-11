@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="m-4">Tasks List</h1>
+  <%= link_to "Create new Task", new_task_path, class: "btn btn-success m-4" %>
+</div>
+
+<ul class="list-group">
+  <% @tasks.each do |task| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <input type="checkbox" <%= task.completed ? "checked" : "" %> disabled class="me-2">
+        <%= link_to task.title, task_path(task), class: "text-decoration-none #{'text-decoration-line-through text-muted' if task.completed?}" %>
+      </div>
+
+      <%= link_to task_path(task), class: 'btn btn-sm btn-danger', data: { turbo_method: :delete, turbo_confirm: 'Delete this task?'} do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
